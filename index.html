@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Etiquetas QR</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .codes-input-section {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f8f8;
+            border-radius: 4px;
+        }
+
+        .codes-input-section label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .codes-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .codes-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(40, 113, 181, 0.1);
+        }
+
+        .process-button-container {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .process-button {
+            min-width: 150px;
+            background-color: #4CAF50;
+        }
+
+        .process-button:hover {
+            background-color: #45a049;
+        }
+
+        .invalid {
+            border-color: #ff4444;
+            background-color: #fff8f8;
+        }
+
+        .dragover {
+            background-color: #e1f5fe !important;
+            border: 2px dashed #2196f3 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="left-panel">
+            <h3>Códigos QR</h3>
+            <div class="settings-container">
+                <div class="size-controls">
+                    <label>Tamaño de etiqueta:</label>
+                    <div class="input-group">
+                        <input type="number" id="labelWidth" placeholder="Ancho" value="100" min="25" step="0.5">
+                        <span class="unit">mm</span>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="labelHeight" placeholder="Alto" value="25" min="15" step="0.5">
+                        <span class="unit">mm</span>
+                    </div>
+                    <button class="action-button" onclick="updateLabelSize()">Actualizar Tamaño</button>
+                </div>
+                <div class="codes-input-section">
+                    <label>Pegar códigos:</label>
+                    <textarea 
+                        id="codesInput" 
+                        placeholder="Pega aquí tus códigos de 13 o 14 dígitos"
+                        class="codes-textarea"
+                    ></textarea>
+                    <div class="process-button-container">
+                        <button class="action-button process-button" onclick="processCodesManually()">
+                            Procesar Códigos
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="codes-grid" id="codesGrid">
+                <!-- Los inputs se generarán dinámicamente -->
+            </div>
+            <div class="button-container">
+                <button class="action-button" onclick="clearAll()">Limpiar Todo</button>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <h3>Etiquetas a Imprimir</h3>
+            <div id="labelsContainer" class="labels-container">
+                <!-- Las etiquetas se generarán dinámicamente -->
+            </div>
+            <div class="button-container">
+                <button id="printButton" class="action-button" onclick="printLabels()">Imprimir</button>
+            </div>
+        </div>
+    </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
